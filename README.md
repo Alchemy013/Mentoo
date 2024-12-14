@@ -1,6 +1,3 @@
-Here's an updated version of the `README.md` file tailored for using **Supabase** as the backend:
-
----
 
 # MenToo - Share Your Story
 
