@@ -1,93 +1,50 @@
+# React + TypeScript + Vite
 
-# MenToo - Share Your Story
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Welcome to **MenToo**, a platform designed to empower men by giving them a voice to share their stories, experiences, and struggles in a safe, supportive environment. Our mission is to foster open dialogue, promote mental health awareness, and break down societal stigmas surrounding masculinity.
+Currently, two official plugins are available:
 
-## 🌟 Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Share Stories:** Anonymously or openly share personal experiences.
-- **Community Support:** A safe space for individuals to support and uplift one another.
-- **Awareness:** Highlight challenges men face, including mental health, societal expectations, and more.
-- **Supabase Integration:** Powered by Supabase for seamless database management and user authentication.
+## Expanding the ESLint configuration
 
-## 🚀 Tech Stack
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- **Frontend:** React.js
-- **Backend:** Supabase
-- **Database:** Supabase (PostgreSQL)
-- **Hosting:** Netlify
-- **Styling:** Tailwind CSS
+- Configure the top-level `parserOptions` property like this:
 
-## 🛠️ Installation & Setup
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-To set up the project locally:
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/mentoo.git
-   cd mentoo
-   ```
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Set Up Supabase**:
-   - Create an account on [Supabase](https://supabase.com/).
-   - Create a new project and configure the database schema as required.
-   - Get your **API URL** and **Anon Key** from the Supabase dashboard.
-
-4. **Environment Variables**:
-   Create a `.env` file in the root directory and add the following environment variables:
-   ```env
-   REACT_APP_SUPABASE_URL=your_supabase_url
-   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-5. **Run the Development Server**:
-   ```bash
-   npm start
-   ```
-
-6. **Build for Production**:
-   ```bash
-   npm run build
-   ```
-
-## 🖥️ Live Preview
-
-Check out the live website here: [MenToo](https://mentoo13.netlify.app/)
-
-## 📌 How to Contribute
-
-We welcome contributions! Follow these steps to contribute to MenToo:
-
-1. **Create a Feature Branch**:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. **Commit Changes**:
-   ```bash
-   git commit -m "Add your feature description"
-   ```
-
-3. **Push to the Branch**:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-4. **Submit a Pull Request**
-
-Please ensure your code adheres to the project’s coding guidelines and is well-documented.
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## ❤️ Acknowledgements
-
-- **Supabase** for providing an open-source backend solution.
-- Special thanks to everyone who supports and contributes to MenToo.
-- Powered by the amazing open-source community.
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
