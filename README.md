@@ -36,6 +36,8 @@ To set up the project locally:
    - Create an account on [Supabase](https://supabase.com/).
    - Create a new project and configure the database schema as required.
    - Get your **API URL** and **Anon Key** from the Supabase dashboard.
+  
+https://github.com/user-attachments/assets/43e84a27-e07e-49de-bfe3-442f85ccc82b
 
 4. **Environment Variables**:
    Create a `.env` file in the root directory and add the following environment variables:
